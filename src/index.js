@@ -22,7 +22,9 @@ const changeIcon = async (/** @type {string} */ iconName) => {
 }
 
 const changeIconWithAlert = async (/** @type {string} */ iconName) => {
-    if (Platform.OS !== 'ios') return
+    if (Platform.OS !== 'ios') {
+      return await changeIcon(iconName)
+    }
     return await TrusteeChangeIcon.changeIconWithAlert(iconName)
 }
 

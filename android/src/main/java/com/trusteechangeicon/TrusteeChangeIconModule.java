@@ -83,13 +83,13 @@ public class TrusteeChangeIconModule extends ReactContextBaseJavaModule implemen
         try {
             PackageManager pm = activity.getPackageManager();
             pm.setComponentEnabledSetting(
-                new ComponentName(this.packageName, this.componentClass),
-                PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                new ComponentName(this.packageName, activeClass),
+                PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
                 PackageManager.DONT_KILL_APP
             );
             pm.setComponentEnabledSetting(
-                new ComponentName(this.packageName, activeClass),
-                PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+                new ComponentName(this.packageName, this.componentClass),
+                PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
                 PackageManager.DONT_KILL_APP
             );
             promise.resolve(enableIcon);
@@ -99,7 +99,7 @@ public class TrusteeChangeIconModule extends ReactContextBaseJavaModule implemen
         }
         this.classesToKill.add(this.componentClass);
         this.componentClass = activeClass;
-        activity.getApplication().registerActivityLifecycleCallbacks(this);
+        // activity.getApplication().registerActivityLifecycleCallbacks(this);
         iconChanged = true;
     }
 
